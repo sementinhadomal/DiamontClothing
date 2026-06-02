@@ -139,13 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const purchaseCurrency = urlParams.get('currency') || 'USD';
     const customerEmail = urlParams.get('email');
 
-    // 1. Dynamically update order code if passed by Whop
-    if (orderId && orderNumberEl) {
+    // 1. Dynamically update order code if passed by Whop (ignore raw placeholders like {id})
+    if (orderId && orderNumberEl && !orderId.includes('{') && !orderId.includes('}')) {
         orderNumberEl.textContent = '#' + orderId.toUpperCase();
     }
 
-    // 2. Dynamically customize Thank You title if customer name is passed
-    if (customerName) {
+    // 2. Dynamically customize Thank You title if customer name is passed (ignore raw placeholders like {username})
+    if (customerName && !customerName.includes('{') && !customerName.includes('}')) {
         const heroTitle = document.getElementById('page-hero-title');
         if (heroTitle) {
             const formattedName = customerName.charAt(0).toUpperCase() + customerName.slice(1);
