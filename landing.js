@@ -47,25 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- QUANTITY SELECTOR ---
-    const btnMinus = document.getElementById('qty-minus');
-    const btnPlus = document.getElementById('qty-plus');
-    const qtyInput = document.getElementById('qty-val');
-    
-    if (btnMinus && btnPlus && qtyInput) {
-        btnMinus.addEventListener('click', () => {
-            let currentVal = parseInt(qtyInput.value) || 1;
-            if (currentVal > 1) {
-                qtyInput.value = currentVal - 1;
-            }
-        });
-        
-        btnPlus.addEventListener('click', () => {
-            let currentVal = parseInt(qtyInput.value) || 1;
-            qtyInput.value = currentVal + 1;
-        });
-    }
-
     // --- PACK SELECTOR ---
     const packButtons = document.querySelectorAll('.pack-btn');
     if (packButtons.length > 0) {

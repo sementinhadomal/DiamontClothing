@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const orderId = urlParams.get('id') || urlParams.get('order_id') || urlParams.get('checkout_id');
     const customerName = urlParams.get('name') || urlParams.get('username') || urlParams.get('first_name');
-    const purchasePrice = urlParams.get('price') || '39.99';
+    const purchasePrice = urlParams.get('price') || '29.99';
     const purchaseCurrency = urlParams.get('currency') || 'USD';
     const customerEmail = urlParams.get('email');
 
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const purchaseParams = {
-        value: parseFloat(purchasePrice) || 39.99,
+        value: parseFloat(purchasePrice) || 29.99,
         currency: purchaseCurrency || 'USD',
         content_name: '9 pack stretch trunks',
         content_type: 'product'
