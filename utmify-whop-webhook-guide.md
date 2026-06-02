@@ -9,7 +9,7 @@ Este documento explica como integrar as vendas da plataforma **Whop** com o rast
 ### 1. Rastreamento Principal (Via Navegador - Já Configurado)
 A página de agradecimento já possui a integração do Pixel da Utmify e o script de UTMs ativos com a sua chave de pixel `6a1e39c0710d91ec4444583a`. 
 Quando o cliente finaliza a compra no Whop e é redirecionado para a página de agradecimento com os parâmetros corretos na URL:
-`https://diamond-clothing-thank-you.vercel.app/?id={id}&email={email}&name={username}&price=39.99&currency=USD`
+`https://diamont-clothing.vercel.app/thank-you.html?id={id}&email={email}&name={username}&price=29.99&currency=USD`
 
 O navegador executa automaticamente o evento de compra (`Purchase`) e a Utmify captura esse evento associando-o aos cookies de UTM que o cliente possuía ao entrar no site. **Essa etapa é o suficiente para rastrear a maioria das vendas do Meta Ads.**
 
@@ -58,11 +58,11 @@ Como o Whop não possui integração direta na lista da Utmify e os formatos de 
     {
       "id": "{{1.action.data.product.id}}",
       "name": "9 pack stretch trunks",
-      "price": 39.99,
+      "price": 29.99,
       "quantity": 1,
       "planId": "{{1.action.data.plan.id}}",
       "planName": "9 pack stretch trunks plan",
-      "priceInCents": 3999
+      "priceInCents": 2999
     }
   ],
   "trackingParameters": {
@@ -73,10 +73,10 @@ Como o Whop não possui integração direta na lista da Utmify e os formatos de 
     "utm_term": ""
   },
   "commission": {
-    "value": 39.99,
-    "totalPriceInCents": 3999,
+    "value": 29.99,
+    "totalPriceInCents": 2999,
     "gatewayFeeInCents": 200,
-    "userCommissionInCents": 3799,
+    "userCommissionInCents": 2799,
     "currency": "USD"
   },
   "isTest": false
@@ -124,7 +124,7 @@ Após o Passo B (envio para Utmify), adicione mais um módulo **HTTP** -> **Make
       },
       "custom_data": {
         "currency": "USD",
-        "value": 39.99,
+        "value": 29.99,
         "content_name": "9 pack stretch trunks",
         "content_type": "product",
         "order_id": "{{orderId}}"
