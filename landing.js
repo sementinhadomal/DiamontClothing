@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SIZE SELECTOR ---
     const sizeButtons = document.querySelectorAll('.size-btn');
     const selectedSizeLabel = document.getElementById('selected-size');
+    const buyNowBtn = document.getElementById('buy-now-btn');
     
     if (sizeButtons.length > 0) {
         sizeButtons.forEach(btn => {
@@ -71,6 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (selectedSizeLabel) {
                     const sizeName = btn.getAttribute('data-size-name');
                     selectedSizeLabel.textContent = sizeName;
+                }
+
+                if (buyNowBtn) {
+                    const checkoutUrl = btn.getAttribute('data-checkout-url');
+                    if (checkoutUrl) {
+                        buyNowBtn.setAttribute('href', checkoutUrl);
+                    }
                 }
             });
         });
