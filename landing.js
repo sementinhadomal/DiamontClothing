@@ -64,6 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const buyNowBtn = document.getElementById('buy-now-btn');
     
     if (sizeButtons.length > 0) {
+        // Initialize default active button href
+        const activeBtn = document.querySelector('.size-btn.active');
+        if (activeBtn && buyNowBtn) {
+            const checkoutUrl = activeBtn.getAttribute('data-checkout-url');
+            const planId = checkoutUrl ? checkoutUrl.split('/').pop() : '';
+            const sizeText = activeBtn.textContent.trim();
+            buyNowBtn.setAttribute('href', `checkout.html?plan=${planId}&size=${sizeText}&product=9 PACK TRUNKS DIAMOND COTTON STRETCH&price=29.99`);
+            buyNowBtn.removeAttribute('target');
+        }
+
         sizeButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 sizeButtons.forEach(b => b.classList.remove('active'));
@@ -76,9 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (buyNowBtn) {
                     const checkoutUrl = btn.getAttribute('data-checkout-url');
-                    if (checkoutUrl) {
-                        buyNowBtn.setAttribute('href', checkoutUrl);
-                    }
+                    const planId = checkoutUrl ? checkoutUrl.split('/').pop() : '';
+                    const sizeText = btn.textContent.trim();
+                    buyNowBtn.setAttribute('href', `checkout.html?plan=${planId}&size=${sizeText}&product=9 PACK TRUNKS DIAMOND COTTON STRETCH&price=29.99`);
+                    buyNowBtn.removeAttribute('target');
                 }
             });
         });

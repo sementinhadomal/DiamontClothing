@@ -1,0 +1,518 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DIAMONT - Checkout</title>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1014024587850948');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1014024587850948&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: #fff;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .checkout-wrap {
+      display: flex;
+      align-items: flex-start;
+      min-height: 100vh;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* ESQUERDO — formulário */
+    .checkout-left {
+      flex: 1;
+      padding: 48px 48px 80px 48px;
+      min-width: 0;
+    }
+
+    /* DIREITO — resumo */
+    .checkout-right {
+      width: 400px;
+      background: #ffffff;
+      border-left: 1px solid #e1e1e1;
+      padding: 48px 32px 80px;
+      flex-shrink: 0;
+    }
+
+    .shop-logo {
+      font-size: 22px; font-weight: 700; color: #1a1a1a;
+      margin-bottom: 32px; display: block; text-decoration: none;
+    }
+
+    .section-title {
+      font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 14px;
+    }
+    .section-divider {
+      border: none; border-top: 1px solid #e8e8e8; margin: 24px 0;
+    }
+
+    .field-group { margin-bottom: 12px; }
+    .field-row { display: flex; gap: 10px; }
+    .field-row .field-group { flex: 1; }
+
+    label { display: block; font-size: 12px; color: #737373; margin-bottom: 4px; }
+
+    input[type=text], input[type=email], input[type=tel], select {
+      width: 100%; height: 44px; padding: 0 14px;
+      border: 1px solid #d9d9d9; border-radius: 5px;
+      font-size: 14px; color: #1a1a1a; background: #fff;
+      outline: none; transition: border 0.15s;
+      appearance: none; -webkit-appearance: none;
+      font-family: inherit;
+    }
+    input:focus, select:focus {
+      border-color: #1a1a1a;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+    }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23737373' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      padding-right: 36px; cursor: pointer;
+    }
+    .checkbox-row {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: #333; cursor: pointer; margin-top: 2px;
+    }
+    .checkbox-row input[type=checkbox] {
+      width: 16px; height: 16px; accent-color: #1a1a1a;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .region-group { display: none; }
+
+    /* RESUMO */
+    .order-item { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .item-img {
+      width: 64px; height: 64px;
+      flex-shrink: 0; position: relative;
+    }
+    .item-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid #e1e1e1; }
+    .item-badge {
+      position: absolute; top: -6px; right: -6px;
+      background: #737373; color: #fff; border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600;
+    }
+    .item-info { flex: 1; }
+    .item-name { font-size: 13px; font-weight: 500; color: #1a1a1a; line-height: 1.4; }
+    .item-variant { font-size: 12px; color: #737373; margin-top: 3px; }
+    .item-price { font-size: 14px; font-weight: 500; color: #1a1a1a; white-space: nowrap; }
+    .product-badge {
+      display: inline-block; background: #e8f5e9; color: #2e7d32;
+      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px;
+    }
+    .summary-line {
+      display: flex; justify-content: space-between;
+      font-size: 13px; color: #737373; margin-bottom: 8px;
+    }
+    .summary-line.total {
+      font-size: 16px; color: #1a1a1a; font-weight: 600;
+      padding-top: 12px; border-top: 1px solid #e8e8e8; margin-top: 4px;
+    }
+    .summary-line.total .curr {
+      font-size: 12px; font-weight: 400; color: #737373; margin-right: 4px;
+    }
+
+    /* WHOP — sem altura fixa, cresce livremente */
+    .whop-divider { border: none; border-top: 1px solid #e1e1e1; margin: 24px 0; }
+    .whop-container { width: 100%; display: block; }
+
+    .secure-note {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: #aaa; margin-top: 20px; justify-content: center;
+    }
+
+    .policy-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
+    .policy-links a { font-size: 12px; color: #737373; text-decoration: none; }
+    .policy-links a:hover { color: #1a1a1a; text-decoration: underline; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .checkout-wrap { flex-direction: column; }
+
+      .checkout-right {
+        width: 100%; border-left: none;
+        border-bottom: 1px solid #e1e1e1;
+        padding: 0; order: -1;
+      }
+
+      .checkout-left {
+        width: 100%;
+        padding: 20px 16px 60px;
+      }
+
+      .mobile-summary-toggle {
+        display: flex; width: 100%; background: #f5f5f5;
+        border: none; border-bottom: 1px solid #e1e1e1;
+        padding: 14px 16px; font-size: 14px; color: #1a1a1a;
+        font-weight: 500; cursor: pointer;
+        align-items: center; justify-content: space-between;
+        font-family: inherit; min-height: 48px;
+      }
+      .toggle-left { display: flex; align-items: center; gap: 8px; color: #1a6dcc; }
+      .toggle-right { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+
+      .summary-collapsible { overflow: hidden; transition: max-height 0.3s ease; max-height: 500px; }
+      .summary-collapsible.closed { max-height: 0; }
+      .summary-inner { padding: 20px 16px; border-bottom: 1px solid #e1e1e1; background: #ffffff; }
+
+      /* No mobile, o Whop fica no esquerdo abaixo do form — esconde o do direito */
+      .whop-right-block { display: none; }
+
+      .field-row { flex-direction: column; gap: 0; }
+
+      input[type=text], input[type=email], input[type=tel], select {
+        height: 48px; font-size: 16px; /* evita zoom automático no iOS */
+      }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-summary-toggle { display: none; }
+      .summary-collapsible { max-height: none !important; overflow: visible; }
+      .summary-inner { padding: 0; background: transparent; border: none; }
+      /* No desktop, o Whop fica no direito — esconde o do esquerdo */
+      .whop-left-block { display: none; }
+    }
+
+    /* Telas muito grandes: adiciona padding lateral para não colar nas bordas */
+    @media (min-width: 769px) and (max-width: 1150px) {
+      .checkout-left { padding-left: 24px; }
+      .checkout-right { padding-left: 24px; padding-right: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="checkout-wrap">
+
+  <!-- ════════════ ESQUERDO ════════════ -->
+  <div class="checkout-left">
+    <a href="index.html" class="shop-logo">DIAMONT</a>
+
+    <div class="section-title">Contact Information</div>
+    <div class="field-row">
+      <div class="field-group">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="First Name">
+      </div>
+      <div class="field-group">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Last Name">
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="section-title">Shipping Address</div>
+
+    <div class="field-group">
+      <label for="country">Country/Region</label>
+      <select id="country" onchange="onCountryChange(this)">
+        <option value="">Select country</option>
+        <option value="US" selected="">United States</option>
+        <option value="GB">United Kingdom</option>
+        <option value="CA">Canada</option>
+        <option value="AU">Australia</option>
+        <option value="DE">Germany</option>
+        <option value="FR">France</option>
+        <option value="BR">Brazil</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label for="address">Street and House Number</label>
+      <input type="text" id="address" placeholder="Address">
+    </div>
+    <div class="field-group">
+      <label for="address2">Apartment, suite, etc. (optional)</label>
+      <input type="text" id="address2" placeholder="Apartment, floor, c/o ...">
+    </div>
+
+    <div class="field-row">
+      <div class="field-group" style="max-width:140px">
+        <label for="plz">ZIP / Postal Code</label>
+        <input type="text" id="plz" placeholder="00000" maxlength="10" oninput="fmtPlz(this)">
+      </div>
+      <div class="field-group">
+        <label for="city">City</label>
+        <input type="text" id="city" placeholder="City">
+      </div>
+    </div>
+
+    <div class="field-group region-group" id="regionGroup" style="display: none;">
+      <label id="regionLabel">State / Province</label>
+      <select id="region"><option value="">Please select</option></select>
+    </div>
+
+    <label class="checkbox-row" style="margin-top:6px">
+      <input type="checkbox" checked> Save my information for next purchase
+    </label>
+
+    <!-- WHOP — mobile (sempre visível abaixo do form, sem cortes) -->
+    <div class="whop-left-block">
+      <hr class="section-divider">
+      <div class="section-title">Payment</div>
+      <div class="whop-container" data-whop-checkout-theme="light" data-whop-checkout-style-container-padding-x="0" data-whop-checkout-style-container-padding-top="0"></div>
+      <div class="secure-note">
+        <svg width="11" height="13" viewBox="0 0 12 14" fill="none"><path d="M6 0L0 2.5V6.5C0 9.8 2.6 12.9 6 14C9.4 12.9 12 9.8 12 6.5V2.5L6 0Z" fill="#ccc"></path></svg>
+        Secure and encrypted transaction
+      </div>
+    </div>
+
+    <div class="policy-links">
+      <a href="#">Return Policy</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+
+  </div>
+
+  <!-- ════════════ DIREITO ════════════ -->
+  <div class="checkout-right">
+
+    <!-- Toggle accordion mobile -->
+    <button class="mobile-summary-toggle" onclick="toggleSummary(this)">
+      <span class="toggle-left">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        Hide order summary  ▴
+      </span>
+      <span class="toggle-right">$29.99</span>
+    </button>
+
+    <div class="summary-collapsible" id="summaryCollapsible">
+      <div class="summary-inner">
+        <div class="order-item">
+          <div class="item-img">
+            <img src="assets/product-real-3.jpg" alt="DIAMONT Premium Stretch Trunks">
+            <div class="item-badge">1</div>
+          </div>
+          <div class="item-info">
+            <div class="item-name" id="item-name">9 PACK TRUNKS DIAMOND COTTON STRETCH</div>
+            <div class="item-variant" id="item-variant" style="margin-top:4px">Size: XS</div>
+            <div class="item-variant" style="margin-top:4px">
+              <span class="product-badge">🚚 Free Shipping</span>
+            </div>
+          </div>
+          <div class="item-price" id="item-price">$29.99</div>
+        </div>
+        <div class="summary-line"><span>Subtotal</span><span id="summary-subtotal">$29.99</span></div>
+        <div class="summary-line"><span>Shipping</span><span style="color:#2e7d32;font-weight:500;">Free</span></div>
+        <div class="summary-line total">
+          <span>Total</span>
+          <span><span class="curr">USD</span><span id="summary-total">$29.99</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHOP — desktop -->
+    <div class="whop-right-block">
+      <hr class="whop-divider">
+      <div class="section-title" style="margin-bottom:14px;">Payment</div>
+      <div class="whop-container" data-whop-checkout-theme="light" data-whop-checkout-style-container-padding-x="0" data-whop-checkout-style-container-padding-top="0"></div>
+      <div class="secure-note">
+        <svg width="11" height="13" viewBox="0 0 12 14" fill="none"><path d="M6 0L0 2.5V6.5C0 9.8 2.6 12.9 6 14C9.4 12.9 12 9.8 12 6.5V2.5L6 0Z" fill="#ccc"></path></svg>
+        Secure and encrypted transaction
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  var regions = {
+    US: {
+      label: 'State',
+      list: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado',
+             'Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho',
+             'Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana',
+             'Maine','Maryland','Massachusetts','Michigan','Minnesota',
+             'Mississippi','Missouri','Montana','Nebraska','Nevada',
+             'New Hampshire','New Jersey','New Mexico','New York',
+             'North Carolina','North Dakota','Ohio','Oklahoma','Oregon',
+             'Pennsylvania','Rhode Island','South Carolina','South Dakota',
+             'Tennessee','Texas','Utah','Vermont','Virginia','Washington',
+             'West Virginia','Wisconsin','Wyoming']
+    },
+    CA: {
+      label: 'Province',
+      list: ['Alberta','British Columbia','Manitoba','New Brunswick',
+             'Newfoundland and Labrador','Nova Scotia','Ontario',
+             'Prince Edward Island','Quebec','Saskatchewan']
+    },
+    AU: {
+      label: 'State',
+      list: ['Australian Capital Territory','New South Wales','Northern Territory',
+             'Queensland','South Australia','Tasmania','Victoria','Western Australia']
+    },
+    DE: {
+      label: 'State',
+      list: ['Baden-Württemberg','Bavaria','Berlin','Brandenburg','Bremen',
+             'Hamburg','Hesse','Lower Saxony','Mecklenburg-Vorpommern',
+             'North Rhine-Westphalia','Rhineland-Palatinate','Saarland',
+             'Saxony','Saxony-Anhalt','Schleswig-Holstein','Thuringia']
+    }
+  };
+  var plzLengths = { US: 5, CA: 6, AU: 4, DE: 5 };
+
+  function onCountryChange(sel) {
+    var val = sel.value;
+    var rg  = document.getElementById('regionGroup');
+    var rl  = document.getElementById('regionLabel');
+    var rs  = document.getElementById('region');
+    var plz = document.getElementById('plz');
+    var len = plzLengths[val] || 10;
+    plz.maxLength = len;
+    plz.placeholder = '00000';
+    var data = regions[val];
+    if (data) {
+      rl.textContent = data.label;
+      rs.innerHTML = '<option value="">Please select</option>' +
+        data.list.map(function(r){ return '<option>'+r+'</option>'; }).join('');
+      rg.style.display = 'block';
+    } else {
+      rg.style.display = 'none';
+    }
+  }
+
+  function fmtPlz(el) {
+    var country = document.getElementById('country').value;
+    var len = plzLengths[country] || 5;
+    el.value = el.value.replace(/\D/g,'').slice(0, len);
+  }
+
+  onCountryChange(document.getElementById('country'));
+
+  var summaryOpen = true;
+  function toggleSummary(btn) {
+    summaryOpen = !summaryOpen;
+    document.getElementById('summaryCollapsible').classList.toggle('closed', !summaryOpen);
+    var icon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>';
+    btn.querySelector('.toggle-left').innerHTML = summaryOpen
+      ? icon + ' Hide order summary  ▴'
+      : icon + ' Show order summary  ▾';
+  }
+</script>
+
+<script>
+  // ── Read URL parameters passed from the product page ──────────────────────
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+
+    var size    = params.get('size') || '';    // e.g. "XS", "S", "M", "L", "XL", "XXL"
+    var plan    = params.get('plan') || '';    // e.g. "plan_GKCqi9cub20QK"
+    var product = params.get('product') || '9 PACK TRUNKS DIAMOND COTTON STRETCH';
+    var price   = params.get('price') || '29.99';
+
+    // Size mapping to Whop Plan IDs
+    var planMapping = {
+      'xs': 'plan_GKCqi9cub20QK',
+      's': 'plan_MTOjr6OyHSpbP',
+      'm': 'plan_ddPRuNWJkyy0w',
+      'l': 'plan_sWuqcWky50YoJ',
+      'xl': 'plan_ah0VyirzppzPN',
+      'xxl': 'plan_LNZKemcfdLcjw'
+    };
+
+    var resolvedPlanId = plan;
+    if (!resolvedPlanId && size) {
+      var cleanSize = size.toLowerCase().trim();
+      if (cleanSize.includes('extra small') || cleanSize === 'xs') {
+        resolvedPlanId = planMapping['xs'];
+      } else if (cleanSize.includes('small') || cleanSize === 's') {
+        resolvedPlanId = planMapping['s'];
+      } else if (cleanSize.includes('medium') || cleanSize === 'm') {
+        resolvedPlanId = planMapping['m'];
+      } else if (cleanSize.includes('large') || cleanSize === 'l') {
+        resolvedPlanId = planMapping['l'];
+      } else if (cleanSize.includes('x-large') || cleanSize.includes('extra large') || cleanSize === 'xl') {
+        resolvedPlanId = planMapping['xl'];
+      } else if (cleanSize.includes('xx-large') || cleanSize.includes('extra extra large') || cleanSize === 'xxl') {
+        resolvedPlanId = planMapping['xxl'];
+      }
+    }
+
+    if (!resolvedPlanId) {
+      resolvedPlanId = 'plan_GKCqi9cub20QK'; // default to XS
+    }
+
+    // Set the plan ID on all Whop containers
+    var containers = document.querySelectorAll('.whop-container');
+    containers.forEach(function (el) {
+      el.setAttribute('data-whop-checkout-plan-id', resolvedPlanId);
+      // Set dynamic redirect URL
+      var returnUrl = window.location.origin + '/thank-you.html?price=' + price + '&currency=USD';
+      el.setAttribute('data-whop-checkout-return-url', returnUrl);
+    });
+
+    // Update product name in order summary
+    var nameEl = document.getElementById('item-name');
+    if (nameEl) nameEl.textContent = product;
+
+    // Update variant line
+    var variantEl = document.getElementById('item-variant');
+    if (variantEl) {
+      variantEl.textContent = size ? 'Size: ' + size : 'Size: XS';
+    }
+
+    // Update price fields in summary
+    var formatted = '$' + parseFloat(price).toFixed(2);
+    var priceEl    = document.getElementById('item-price');
+    var subtotalEl = document.getElementById('summary-subtotal');
+    var totalEl    = document.getElementById('summary-total');
+    var toggleRight = document.querySelector('.toggle-right');
+
+    if (priceEl)    priceEl.textContent    = formatted;
+    if (subtotalEl) subtotalEl.textContent  = formatted;
+    if (totalEl)    totalEl.textContent     = formatted;
+    if (toggleRight) toggleRight.textContent = formatted;
+
+    // Save customer name input to localStorage
+    var fnameInput = document.getElementById('fname');
+    var lnameInput = document.getElementById('lname');
+
+    function saveNamesToStorage() {
+      localStorage.setItem('customer_first_name', (fnameInput.value || '').trim());
+      localStorage.setItem('customer_last_name', (lnameInput.value || '').trim());
+    }
+
+    if (fnameInput) fnameInput.addEventListener('input', saveNamesToStorage);
+    if (lnameInput) lnameInput.addEventListener('input', saveNamesToStorage);
+
+    // Set a fallback random order number
+    if (!localStorage.getItem('customer_order_id')) {
+      var randId = 'DM' + Math.floor(100000 + Math.random() * 900000);
+      localStorage.setItem('customer_order_id', randId);
+    }
+
+    // Now dynamically load the Whop script
+    var whopScript = document.createElement('script');
+    whopScript.src = "https://js.whop.com/static/checkout/loader.js";
+    whopScript.async = true;
+    whopScript.defer = true;
+    document.head.appendChild(whopScript);
+  })();
+</script>
+
+</body>
+</html>

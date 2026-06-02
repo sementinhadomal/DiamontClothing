@@ -133,23 +133,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- WHOP REDIRECT & UTMIFY TRACKING INTEGRATION ---
     const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('id') || urlParams.get('order_id') || urlParams.get('checkout_id');
-    const customerName = urlParams.get('name') || urlParams.get('username') || urlParams.get('first_name');
+    
+    // Resolve order ID: URL parameter or localStorage fallback or random generation
+    let orderId = urlParams.get('id') || urlParams.get('order_id') || urlParams.get('checkout_id');
+    if (!orderId || orderId.includes('{') || orderId.includes('}')) {
+        orderId = localStorage.getItem('customer_order_id') || ('DM' + Math.floor(100000 + Math.random() * 900000));
+    }
+    
+    // Resolve customer name: URL parameter or localStorage fallback
+    let customerName = urlParams.get('name') || urlParams.get('username') || urlParams.get('first_name');
+    if (!customerName || customerName.includes('{') || customerName.includes('}')) {
+        customerName = localStorage.getItem('customer_first_name') || '';
+    }
+
     const purchasePrice = urlParams.get('price') || '29.99';
     const purchaseCurrency = urlParams.get('currency') || 'USD';
     const customerEmail = urlParams.get('email');
 
-    // 1. Dynamically update order code if passed by Whop (ignore raw placeholders like {id})
-    if (orderId && orderNumberEl && !orderId.includes('{') && !orderId.includes('}')) {
+    // 1. Dynamically update order code
+    if (orderId && orderNumberEl) {
         orderNumberEl.textContent = '#' + orderId.toUpperCase();
+        // Also update contact support mention inside FAQ Item 3 if present
+        const faqInner3 = document.querySelector('#faq-item-3 .faq-inner');
+        if (faqInner3) {
+            faqInner3.innerHTML = `If you need to adjust your shipping address, please contact our priority customer service immediately at <strong>concierge@diamondclothing.com</strong>. Make sure to include your order ID <strong>#${orderId.toUpperCase()}</strong>. Please note that address changes cannot be guaranteed if the local courier has already sorted the parcel.`;
+        }
     }
 
-    // 2. Dynamically customize Thank You title if customer name is passed (ignore raw placeholders like {username})
-    if (customerName && !customerName.includes('{') && !customerName.includes('}')) {
-        const heroTitle = document.getElementById('page-hero-title');
-        if (heroTitle) {
+    // 2. Dynamically customize Thank You title
+    const heroTitle = document.getElementById('page-hero-title');
+    if (heroTitle) {
+        if (customerName) {
             const formattedName = customerName.charAt(0).toUpperCase() + customerName.slice(1);
             heroTitle.innerHTML = `Thank you, ${formattedName}. <br><span>Your order is already in route.</span>`;
+        } else {
+            heroTitle.innerHTML = `Thank you. <br><span>Your order is already in route.</span>`;
         }
     }
 
