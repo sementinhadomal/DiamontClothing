@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You For Your Order | Diamond Clothing</title>
+    <meta name="description" content="Thank you for shopping at Diamond Clothing. Your premium order is already in transit. Expect your tracking details in your email in 4-6 days.">
+    
+    <!-- Open Graph / SEO -->
+    <meta property="og:title" content="Order Confirmed | Diamond Clothing">
+    <meta property="og:description" content="Your exclusive purchase is already in route. Track details arriving via email.">
+    <meta property="og:type" content="website">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1014024587850948');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1014024587850948&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Utmify Pixel Integration -->
+    <script>
+      window.pixelId = "6a1e39c0710d91ec4444583a";
+      var a = document.createElement("script");
+      a.setAttribute("async", "");
+      a.setAttribute("defer", "");
+      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+      document.head.appendChild(a);
+    </script>
+
+    <!-- Utmify UTMs Capture Script -->
+    <script
+      src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+      data-utmify-prevent-xcod-sck
+      data-utmify-prevent-subids
+      async
+      defer
+    ></script>
+</head>
+<body>
+
+    <!-- Suttle luxury background animation canvas -->
+    <canvas id="bg-canvas" class="background-canvas"></canvas>
+    <div class="gradient-overlay"></div>
+
+    <!-- Header -->
+    <header class="header" id="main-header">
+        <div class="container header-container">
+            <a href="#" class="brand-logo" id="brand-logo-link">
+                <!-- Premium Delivery Truck Icon SVG -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 8h-3V4H1v13h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h3v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l2.25 3H17V9.5h2.5zM18 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                </svg>
+                <span class="brand-name">Diamond Clothing</span>
+            </a>
+            <a href="https://whop.com/easy-food-revenues/9-pack-stretch/" class="nav-link" id="visit-store-btn" target="_blank" rel="noopener noreferrer">Visit Store</a>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="container main-grid" id="landing-main">
+        
+        <!-- Left Side: Order Status & Timings -->
+        <section class="order-status-section" id="status-section">
+            <div class="thank-you-card" id="main-thank-you-card">
+                <div class="badge-wrapper">
+                    <div class="success-badge" id="success-badge-container">
+                        <span class="dot"></span>
+                        Order Confirmed
+                    </div>
+                </div>
+                
+                <h1 class="main-title" id="page-hero-title">
+                    Thank you. <br>
+                    <span>Your order is already in route.</span>
+                </h1>
+                
+                <p class="sub-title">
+                    We appreciate your trust in Diamond Clothing. Our master tailors have compiled your order, and the courier has already received the package.
+                </p>
+
+                <!-- Stepper Progress Tracker -->
+                <div class="tracking-wrapper" id="order-tracking-stepper">
+                    <div class="tracking-header">
+                        <span class="tracking-title">Shipment Tracker</span>
+                        <span class="order-number" id="order-number" title="Click to copy order ID">
+                            #DM-98246X
+                        </span>
+                    </div>
+
+                    <div class="timeline" id="status-timeline">
+                        <div class="timeline-line">
+                            <div class="timeline-progress" id="progress-bar"></div>
+                        </div>
+
+                        <!-- Step 1: Confirmed -->
+                        <div class="timeline-step completed" id="step-confirmed">
+                            <div class="step-node">✓</div>
+                            <span class="step-label">Confirmed</span>
+                            <span class="step-sublabel">Processing done</span>
+                        </div>
+
+                        <!-- Step 2: In Route -->
+                        <div class="timeline-step active" id="step-in-route">
+                            <div class="step-node">2</div>
+                            <span class="step-label">In Route</span>
+                            <span class="step-sublabel">Parcel in transit</span>
+                        </div>
+
+                        <!-- Step 3: Out for Delivery -->
+                        <div class="timeline-step" id="step-out-delivery">
+                            <div class="step-node">3</div>
+                            <span class="step-label">On Its Way</span>
+                            <span class="step-sublabel">Local sorting</span>
+                        </div>
+
+                        <!-- Step 4: Arrived -->
+                        <div class="timeline-step" id="step-delivered">
+                            <div class="step-node">✓</div>
+                            <span class="step-label">Delivered</span>
+                            <span class="step-sublabel">Signature required</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping / Tracking Alert Notice -->
+                <div class="info-card" id="tracking-dispatch-info">
+                    <div class="info-icon">
+                        <!-- Modern Delivery Truck SVG -->
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>Tracking Dispatch Details</h3>
+                        <p>
+                            Your parcel is officially on its way! Within <strong>4 to 6 business days</strong>, a live tracking link and complete route details will be sent directly to your registered e-mail address.
+                        </p>
+                        <div class="highlight-box" id="notice-pill">
+                            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            Tracking email arriving in 4-6 days
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Side: Luxury Graphic Showcase & Summary -->
+        <aside class="sidebar" id="sidebar-container">
+            
+            <!-- Beautiful AI B&W Delivery Package Image Overlay Card -->
+            <div class="editorial-image-wrapper" id="delivery-image-container">
+                <img src="assets/hero-delivery.png" alt="Diamond Clothing Premium Package Delivery" class="editorial-image" id="editorial-hero">
+                <div class="image-overlay">
+                    <span class="image-brand">Diamond Clothing</span>
+                    <h2 class="image-quote">"Your exclusive piece is in transit."</h2>
+                </div>
+            </div>
+
+            <!-- Order Summary Details Box -->
+            <div class="summary-card" id="order-summary-card">
+                <h3 class="summary-title" id="summary-title-heading">
+                    Order Summary <span>(1 item)</span>
+                </h3>
+                
+                <div class="summary-item">
+                    <span>9 pack stretch trunks</span>
+                    <span>$39.99</span>
+                </div>
+                
+                <div class="summary-item">
+                    <span>Express Insured Shipping</span>
+                    <span style="letter-spacing: 0.05em; font-weight: 600;">FREE</span>
+                </div>
+                
+                <div class="summary-item total">
+                    <span>Total Charged</span>
+                    <span>$39.99</span>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Interactive FAQ Section -->
+    <section class="container faq-section" id="faq-section-wrapper">
+        <h2 class="faq-title" id="faq-section-title">Delivery & Tracking Information</h2>
+        
+        <div class="faq-grid" id="faq-accordion-grid">
+            
+            <!-- FAQ Item 1 -->
+            <div class="faq-item" id="faq-item-1">
+                <button class="faq-trigger" id="faq-btn-1">
+                    When exactly will I receive the tracking code?
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                <div class="faq-content">
+                    <div class="faq-inner">
+                        Your parcel is already in route! Because our high-end fulfillment system works automatically, your localized tracking code will be fully generated and dispatched to your email address within <strong>4 to 6 business days</strong>. No action is required on your part.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="faq-item" id="faq-item-2">
+                <button class="faq-trigger" id="faq-btn-2">
+                    How long does shipping take after route dispatch?
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                <div class="faq-content">
+                    <div class="faq-inner">
+                        Since your package is already in transit, shipping typically takes between <strong>7 to 14 business days</strong> depending on your region. You will be able to follow its door-to-door transit status once you receive your tracking email.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="faq-item" id="faq-item-3">
+                <button class="faq-trigger" id="faq-btn-3">
+                    Can I make changes to my delivery address?
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                <div class="faq-content">
+                    <div class="faq-inner">
+                        If you need to adjust your shipping address, please contact our priority customer service immediately at <strong>concierge@diamondclothing.com</strong>. Make sure to include your order ID <strong>#DM-98246X</strong>. Please note that address changes cannot be guaranteed if the local courier has already sorted the parcel.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="faq-item" id="faq-item-4">
+                <button class="faq-trigger" id="faq-btn-4">
+                    What is the Diamond Clothing return policy?
+                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                <div class="faq-content">
+                    <div class="faq-inner">
+                        We offer a complimentary <strong>30-day return or exchange period</strong> for all unworn garments with their original packaging and signature diamond tags attached. If you wish to process an exchange, simply email us once your package is received.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="main-footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <span class="brand-name">Diamond Clothing</span>
+                    <span class="footer-quote">Silent luxury, uncompromising quality.</span>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <span class="copyright" id="copyright-label">&copy; 2026 Diamond Clothing. All rights reserved.</span>
+                <div class="footer-legal">
+                    <a href="#" class="legal-link">Privacy Policy</a>
+                    <a href="#" class="legal-link">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Clipboard Copy Toast Notification -->
+    <div id="toast" class="toast">
+        Order ID Copied to Clipboard
+    </div>
+
+    <!-- Script File -->
+    <script src="app.js"></script>
+</body>
+</html>
