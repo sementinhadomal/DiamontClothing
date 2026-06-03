@@ -347,17 +347,11 @@
     <div class="whop-left-block">
       <hr class="section-divider">
       <div class="section-title">Payment</div>
-      <script>
-        document.write(
-          '<div class="whop-container" ' +
-          'data-whop-checkout-plan-id="' + window.__DIAMONT_PLAN_ID + '" ' +
-          'data-whop-checkout-return-url="' + window.__DIAMONT_RETURN_URL + '" ' +
-          'data-whop-checkout-theme="light" ' +
-          'data-whop-checkout-locale="en" ' +
-          'data-whop-checkout-style-container-padding-x="0" ' +
-          'data-whop-checkout-style-container-padding-top="0"></div>'
-        );
-      </script>
+      <div class="whop-container" id="whop-mobile"
+        data-whop-checkout-theme="light"
+        data-whop-checkout-locale="en"
+        data-whop-checkout-style-container-padding-x="0"
+        data-whop-checkout-style-container-padding-top="0"></div>
       <div class="secure-note">
         <svg width="11" height="13" viewBox="0 0 12 14" fill="none"><path d="M6 0L0 2.5V6.5C0 9.8 2.6 12.9 6 14C9.4 12.9 12 9.8 12 6.5V2.5L6 0Z" fill="#ccc"></path></svg>
         Secure and encrypted transaction
@@ -438,17 +432,11 @@
     <div class="whop-right-block">
       <hr class="whop-divider">
       <div class="section-title" style="margin-bottom:14px;">Payment</div>
-      <script>
-        document.write(
-          '<div class="whop-container" ' +
-          'data-whop-checkout-plan-id="' + window.__DIAMONT_PLAN_ID + '" ' +
-          'data-whop-checkout-return-url="' + window.__DIAMONT_RETURN_URL + '" ' +
-          'data-whop-checkout-theme="light" ' +
-          'data-whop-checkout-locale="en" ' +
-          'data-whop-checkout-style-container-padding-x="0" ' +
-          'data-whop-checkout-style-container-padding-top="0"></div>'
-        );
-      </script>
+      <div class="whop-container" id="whop-desktop"
+        data-whop-checkout-theme="light"
+        data-whop-checkout-locale="en"
+        data-whop-checkout-style-container-padding-x="0"
+        data-whop-checkout-style-container-padding-top="0"></div>
       <div class="secure-note">
         <svg width="11" height="13" viewBox="0 0 12 14" fill="none"><path d="M6 0L0 2.5V6.5C0 9.8 2.6 12.9 6 14C9.4 12.9 12 9.8 12 6.5V2.5L6 0Z" fill="#ccc"></path></svg>
         Secure and encrypted transaction
@@ -580,6 +568,21 @@
   if (!localStorage.getItem('customer_order_id')) {
     localStorage.setItem('customer_order_id', 'DM' + Math.floor(100000 + Math.random() * 900000));
   }
+</script>
+
+<!-- ══ Apply dynamic plan-id and return-url to static Whop containers ══ -->
+<script>
+  (function() {
+    var planId = window.__DIAMONT_PLAN_ID;
+    var returnUrl = window.__DIAMONT_RETURN_URL;
+    var containers = document.querySelectorAll('.whop-container');
+    for (var i = 0; i < containers.length; i++) {
+      containers[i].setAttribute('data-whop-checkout-plan-id', planId);
+      if (returnUrl) {
+        containers[i].setAttribute('data-whop-checkout-return-url', returnUrl);
+      }
+    }
+  })();
 </script>
 
 </body>
