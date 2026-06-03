@@ -475,6 +475,20 @@
       resolvedPlanId = 'plan_GKCqi9cub20QK'; // default to XS
     }
 
+    // Remove the inactive Whop container to prevent double iframe mounting & reloading loop
+    var isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      var desktopBlock = document.querySelector('.whop-right-block');
+      if (desktopBlock) {
+        desktopBlock.parentNode.removeChild(desktopBlock);
+      }
+    } else {
+      var mobileBlock = document.querySelector('.whop-left-block');
+      if (mobileBlock) {
+        mobileBlock.parentNode.removeChild(mobileBlock);
+      }
+    }
+
     // Set the plan ID on all Whop containers
     var containers = document.querySelectorAll('.whop-container');
     containers.forEach(function (el) {
