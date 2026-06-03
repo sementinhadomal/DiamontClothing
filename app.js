@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const purchasePrice = urlParams.get('price') || '29.99';
-    const purchaseCurrency = urlParams.get('currency') || 'USD';
+    const purchaseCurrency = urlParams.get('currency') || 'GBP';
     const customerEmail = urlParams.get('email');
 
     // 1. Dynamically update order code
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const purchaseParams = {
         value: parseFloat(purchasePrice) || 29.99,
-        currency: purchaseCurrency || 'USD',
+        currency: purchaseCurrency || 'GBP',
         content_name: '9 pack stretch trunks',
         content_type: 'product'
     };
